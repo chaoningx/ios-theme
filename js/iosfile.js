@@ -75,7 +75,7 @@ $(function() {
 		        currentActiveIcon = null,
 		        folderOpen = function(pos, callback) {
 			        $('#mask').fadeIn('slow');
-			      //暂时不做适配了；
+//			        暂时不做适配了；
 			        $('#corner').css('left', pos.left + 18);
 			        $('#corner-inner').css('left', pos.left + 20);
 			        $('#dark').css('top', pos.top + 115).fadeIn('normal', function() {
