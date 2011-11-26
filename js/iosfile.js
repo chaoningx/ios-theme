@@ -16,7 +16,9 @@ var appMock = [
 
 var IOS = {};
 $(function() {
-	
+	var g = function(id) {
+		return document.getElementById(id);
+	};
 	IOS.Data = (function() {
 		var data = {};
 		return function() {
@@ -98,10 +100,11 @@ $(function() {
 			var flag = true,
 		        done = true,
 		        currentActiveIcon = null,
-		        folderOpen = function(pos, callback) {
+		        folderOpen = function(pos, title, callback) {
 			        $('#mask').fadeIn('slow');
-			        $('#corner').css('left', pos.left + 18);
-			        $('#corner-inner').css('left', pos.left + 20);
+			        g('corner').style.left = pos.left + 18 + 'px';
+			        g('corner-inner').style.left = pos.left + 20 + 'px';
+			        g('dark-title').innerHTML = title;
 			        $('#dark').css('top', pos.top + 115).fadeIn('normal', function() {
 			            $('#app-container').slideDown('normal', function() {
 			                done = true;
@@ -129,11 +132,11 @@ $(function() {
 		        if(this.getAttribute('data-type') == 'icon') { return; }
 		        if(!done) { return; }
 		        done = false;
-		        var offset = $(this).offset();
-		        
 		        if(flag) {
+		        	var offset = $(this).offset(),
+		        		title = $('.icon-text', this).html();
 		        	currentActiveIcon = this;
-		        	folderOpen(offset);
+		        	folderOpen(offset, title);
 		        }else {
 		        	folderClose();
 		        }
