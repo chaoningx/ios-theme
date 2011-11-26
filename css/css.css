@@ -14,5 +14,5 @@ body{ background: url(../images/body-bg.png) repeat transparent; -webkit-user-se
 #corner{ z-index: 4; position: absolute; top: -27px; left: 35px; background:url(../images/corner.png) no-repeat transparent; width: 51px; height: 27px; }
 #corner-inner{  z-index: 4; position: absolute; bottom: 0; left: 37px; background:url(../images/corner-inner.png) no-repeat transparent; width: 47px; height: 24px; }
 
-#mask{ top: 0; left: 0; z-index: 2; position: absolute; height: 100%; width: 100%; background-color: #111; opacity: 0.6; }
+#mask{ top: 0; left: 0; z-index: 2; position: fixed; height: 100%; width: 100%; background-color: #111; opacity: 0.6; }
 

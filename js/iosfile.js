@@ -16,8 +16,32 @@ var appMock = [
 
 var IOS = {};
 $(function() {
+	
+	IOS.Data = (function() {
+		var data = {};
+		return function() {
+			var handle = {
+				get: function(key) {
+					return data[key];
+				},
+				set: function(key, value) {
+					var target = data[key];
+					if(!target) {
+						data[key] = value;
+					}else {
+						return false;
+					}
+				},
+				update: function(key, value) {
+					data[key] = value;
+				}
+			};
+			return handle;
+		};
+	}());
+	
 	IOS.Util = {
-		parse: function(str, data) {
+		templateParse: function(str, data) {
 	        var reg = new RegExp('\{(.*?)\}', 'gmi'), seg = '', result = [], pos = 0;
 	        while ((seg = reg.exec(str)) != null) {
 	            var end = reg.lastIndex - seg[0].length, key = seg[1], val = data[key];
@@ -25,7 +49,6 @@ $(function() {
 	            result.push(val);
 	            pos = reg.lastIndex;
 	        }
-	        
 	        if (pos < str.length) {
 	            result.push(str.slice(pos));
 	        }
@@ -39,7 +62,7 @@ $(function() {
 			return function(info, left, top) {
 				info.top = top;
 				info.left = left;
-				return IOS.Util.parse(tpl, info);
+				return IOS.Util.templateParse(tpl, info);
 			};
 		}())
 	};
@@ -48,20 +71,22 @@ $(function() {
 		initialize: function() {
 			var i = 0, data = appMock, len = data.length,
 				temp = [], target,
-				level = 1,
+				column = 0,
+				row = 0,
 				top = 0,
 				left = 0,
 				docWidth = document.body.scrollWidth,
 		        docHeight = document.body.scrollHeight;
-			
+//	        暂时不做分辨率适配了；
 			for(i; i < len; i++) {
 				target = data[i];
-				left = i * 200;
-				top = level * 110;
-				if(left > docWidth) {
-					left = 0;
-					top = ++level * 110 + 88;
+				if(column * 198 + 55 + 88 > docWidth) {
+					column = 0;
+					row += 1;
 				}
+				left = column * 198 + 55;
+				top = row * 220 + 55;
+				column++;
 				temp.push(IOS.Icon.create(target, left, top));
 			};
 			$('#icon-list').css({
@@ -75,7 +100,6 @@ $(function() {
 		        currentActiveIcon = null,
 		        folderOpen = function(pos, callback) {
 			        $('#mask').fadeIn('slow');
-//			        暂时不做适配了；
 			        $('#corner').css('left', pos.left + 18);
 			        $('#corner-inner').css('left', pos.left + 20);
 			        $('#dark').css('top', pos.top + 115).fadeIn('normal', function() {
