@@ -1,17 +1,7 @@
 
 var appMock = [
     { type: 'folder', title: '社交', css: 'folder-icon' },
-    { type: 'folder', title: '游戏', css: 'folder-icon' },
-    { type: 'icon', title: '信息', css: 'message-icon' },
-    { type: 'folder', title: '社交', css: 'folder-icon' },
-    { type: 'folder', title: '游戏', css: 'folder-icon' },
-    { type: 'icon', title: '信息', css: 'message-icon' },
-    { type: 'folder', title: '社交', css: 'folder-icon' },
-    { type: 'folder', title: '游戏', css: 'folder-icon' },
-    { type: 'icon', title: '信息', css: 'message-icon' },
-    { type: 'folder', title: '社交', css: 'folder-icon' },
-    { type: 'folder', title: '游戏', css: 'folder-icon' },
-    { type: 'icon', title: '信息', css: 'message-icon' }
+    { type: 'folder', title: '游戏', css: 'folder-icon' }
 ];
 
 var IOS = {};
